@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import ParticleBackground from './ParticleBackground';
 
@@ -44,32 +44,6 @@ function Hero() {
     },
   };
 
-  const parallaxRef = useRef(null);
-
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      const parallaxContainer = parallaxRef.current;
-      if (!parallaxContainer) return;
-
-      const wValue = parallaxContainer.offsetWidth;
-      const hValue = parallaxContainer.offsetHeight;
-
-      const x = (event.clientX - wValue / 2) / wValue;
-      const y = (event.clientY - hValue / 2) / hValue;
-
-      parallaxContainer.style.transform = `
-        translateX(${x * 20}px)
-        translateY(${y * 20}px)
-      `;
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
   return (
     <section id="hero" className="relative h-screen overflow-hidden flex justify-center items-center text-center text-white">
       <ParticleBackground />
@@ -79,21 +53,26 @@ function Hero() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        ref={parallaxRef}
       >
-        <motion.h1
-          className="text-5xl font-bold font-montserrat mb-4"
-          variants={textVariants}
-        >
-          BigTechTimes: <span className="text-neon-turquoise">Connecting</span> Tomorrow’s Tech Talent
-        </motion.h1>
-        <motion.p
-          className="text-lg mb-8"
-          variants={textVariants}
-        >
-          Empowering tech professionals and students through cutting-edge learning, collaboration, and innovation.
-        </motion.p>
-        <motion.div className="space-x-4" variants={textVariants}>
+        <motion.div className="space-y-6 md:space-y-8">
+          <motion.h1
+            className="text-4xl md:text-6xl lg:text-7xl font-bold font-montserrat leading-tight"
+            variants={textVariants}
+          >
+            <span className="block">BigTechTimes</span>
+            <span className="block text-3xl md:text-5xl lg:text-6xl mt-2">
+              <span className="text-neon-turquoise">Connecting</span>{" "}
+              <span className="block md:inline">Tomorrow's Tech Talent</span>
+            </span>
+          </motion.h1>
+          <motion.p
+            className="text-base md:text-lg lg:text-xl max-w-2xl mx-auto text-gray-300"
+            variants={textVariants}
+          >
+            Empowering tech professionals and students through cutting-edge learning, collaboration, and innovation.
+          </motion.p>
+        </motion.div>
+        <motion.div className="space-x-4 mt-8 md:mt-12" variants={textVariants}>
           <a
             href="/community"
             className="bg-electric-blue hover:bg-neon-turquoise text-white font-bold py-3 px-6 rounded transition-transform transform hover:translate-y-1 inline-block"
@@ -112,7 +91,7 @@ function Hero() {
           </a>
         </motion.div>
         <motion.p
-          className="text-md mt-8"
+          className="text-sm md:text-base lg:text-lg mt-8 md:mt-12 max-w-3xl mx-auto text-gray-400"
           variants={textVariants}
         >
           Discover a space where emerging talent meets industry expertise. Whether you're ready to learn, network, or collaborate on real-world projects, BigTechTimes is your launchpad to the future of technology.

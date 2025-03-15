@@ -2,9 +2,7 @@ import React from 'react';
 import Timeline from './Timeline';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// Change the imports for social media icons
 import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
-// Change the imports for regular icons
 import { faRocket, faUsers, faLightbulb, faHandshake } from '@fortawesome/free-solid-svg-icons';
 
 function About() {
@@ -17,35 +15,45 @@ function About() {
 
   return (
     <div className="min-h-screen bg-deep-space-blue">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-electric-blue to-neon-turquoise opacity-10"></div>
+      {/* Hero Section - Enhanced */}
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-electric-blue/20 to-neon-turquoise/20 opacity-20"></div>
+        <div className="absolute inset-0 bg-[url('/assets/circuit-pattern.svg')] opacity-5"></div>
         <motion.div 
-          className="text-center z-10 px-4"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-center z-10 px-4 max-w-5xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1 }}
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">Empowering Tech Innovation</h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto text-gray-300">
-            Founded in 2024 by Jinish Kathiriya, BigTechTimes is building the future of tech community collaboration.
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-electric-blue to-neon-turquoise text-transparent bg-clip-text">
+            Empowering Tech Innovation
+          </h1>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto text-gray-300 leading-relaxed">
+            Founded in 2024 by <span className="text-neon-turquoise">Jinish Kathiriya</span>, BigTechTimes is building the future of tech community collaboration.
           </p>
         </motion.div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-gray-900">
+      {/* Stats Section - Enhanced */}
+      <section className="py-20 bg-gradient-to-b from-gray-900/50 to-transparent">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
-                className="text-center"
+                className="text-center p-6 rounded-xl bg-deep-space-blue/30 backdrop-blur-sm border border-neon-turquoise/10"
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <h3 className="text-4xl font-bold text-neon-turquoise mb-2">{stat.number}</h3>
+                <motion.h3 
+                  className="text-4xl md:text-5xl font-bold text-neon-turquoise mb-2"
+                  whileInView={{ scale: [0.9, 1.1, 1] }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  {stat.number}
+                </motion.h3>
                 <p className="text-gray-400">{stat.label}</p>
               </motion.div>
             ))}
@@ -53,42 +61,53 @@ function About() {
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="py-16">
+      {/* Mission & Vision - Enhanced */}
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12">
-            <motion.div
-              className="bg-gray-800 p-8 rounded-lg"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-            >
-              <h2 className="text-3xl font-bold mb-6 text-neon-turquoise">Our Mission</h2>
-              <p className="text-gray-300 leading-relaxed">
-                To democratize tech education and foster a community where innovation thrives through collaboration, learning, and shared knowledge.
-              </p>
-            </motion.div>
-            <motion.div
-              className="bg-gray-800 p-8 rounded-lg"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-            >
-              <h2 className="text-3xl font-bold mb-6 text-neon-turquoise">Our Vision</h2>
-              <p className="text-gray-300 leading-relaxed">
-                To become the world's most impactful tech community, where every member has the opportunity to learn, grow, and shape the future of technology.
-              </p>
-            </motion.div>
+            {[
+              {
+                title: "Our Mission",
+                content: "To democratize tech education and foster a community where innovation thrives through collaboration, learning, and shared knowledge."
+              },
+              {
+                title: "Our Vision",
+                content: "To become the world's most impactful tech community, where every member has the opportunity to learn, grow, and shape the future of technology."
+              }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                className="p-8 rounded-xl bg-gradient-to-br from-deep-space-blue/40 to-deep-space-blue/20 backdrop-blur-sm border border-neon-turquoise/10 hover:border-neon-turquoise/30 transition-all duration-300"
+                initial={{ opacity: 0, x: index === 0 ? -20 : 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-electric-blue to-neon-turquoise text-transparent bg-clip-text">{item.title}</h2>
+                <p className="text-gray-300 leading-relaxed text-lg">{item.content}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Founder Section */}
-      <section className="py-16 bg-gray-900">
+      {/* Founder Section - Enhanced */}
+      <section className="py-20 bg-gradient-to-b from-transparent to-gray-900/50">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-6 text-neon-turquoise">Meet Our Founder</h2>
-            </div>
-            <div className="bg-gray-800 rounded-lg p-8 flex flex-col md:flex-row items-center gap-8">
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-electric-blue to-neon-turquoise text-transparent bg-clip-text">Meet Our Founder</h2>
+            </motion.div>
+            <motion.div 
+              className="bg-gradient-to-br from-deep-space-blue/40 to-deep-space-blue/20 backdrop-blur-sm rounded-xl p-8 md:p-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
               <div className="md:w-1/3">
                 <img 
                   src="/assets/team/jinish.jpg" 
@@ -134,33 +153,49 @@ function About() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="py-16">
+      {/* Timeline Section - Enhanced */}
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12 text-neon-turquoise">Our Journey</h2>
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-electric-blue to-neon-turquoise text-transparent bg-clip-text"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Our Journey
+          </motion.h2>
           <Timeline />
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-electric-blue to-neon-turquoise">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Join Our Community?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
+      {/* Call to Action - Enhanced */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-electric-blue/20 to-neon-turquoise/20"></div>
+        <motion.div 
+          className="container mx-auto px-4 text-center relative z-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Join Our Community?</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-300">
             Connect with fellow tech enthusiasts, share your knowledge, and be part of something bigger.
           </p>
-          <a 
+          <motion.a 
             href="/community" 
-            className="bg-white text-deep-space-blue hover:bg-gray-100 font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105"
+            className="bg-electric-blue hover:bg-neon-turquoise text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 inline-flex items-center space-x-2"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            Join BigTechTimes Today
-          </a>
-        </div>
+            <span>Join BigTechTimes Today</span>
+            <span className="ml-2">→</span>
+          </motion.a>
+        </motion.div>
       </section>
     </div>
   );
