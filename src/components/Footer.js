@@ -35,10 +35,10 @@ function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-neon-turquoise">Quick Links</h3>
             <nav className="flex flex-col space-y-2">
-              {["Home", "About", "Learning Hub", "Community", "Blog", "Contact"].map((item) => (
+              {["Home", "About", "Community", "Blog", "Contact"].map((item) => (
                 <Link
                   key={item}
-                  to={item === "Home" ? "/" : `/${item.toLowerCase().replace(" ", "-")}`}
+                  to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
                   className="text-gray-400 hover:text-neon-turquoise transition-colors duration-200 w-fit"
                 >
                   {item}

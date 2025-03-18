@@ -39,7 +39,7 @@ function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8">
-          {["Home", "About", "Learning Hub", "Community", "Blog", "Contact"].map((item, index) => (
+          {["Home", "About", "Community", "Blog", "Contact"].map((item, index) => (
             <Link
               key={index}
               to={item === "Home" ? "/" : `/${item.toLowerCase().replace(" ", "-")}`}
@@ -62,7 +62,7 @@ function Header() {
             exit={{ opacity: 0, y: -10 }}
           >
             <nav className="flex flex-col py-4">
-              {["Home", "About", "Learning Hub", "Community", "Blog", "Contact"].map((item, index) => (
+              {["Home", "About", "Community", "Blog", "Contact"].map((item, index) => (
                 <Link
                   key={index}
                   to={item === "Home" ? "/" : `/${item.toLowerCase().replace(" ", "-")}`}

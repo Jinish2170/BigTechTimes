@@ -1,207 +1,136 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faClock, faUser, faTag, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-
-const articles = [
-  {
-    id: 1,
-    title: 'Building AI-Powered Cybersecurity Systems',
-    summary: 'Explore how artificial intelligence is revolutionizing cybersecurity with advanced threat detection and automated response systems.',
-    content: 'As cyber threats become more sophisticated...',
-    author: 'Jinish Kathiriya',
-    date: 'February 15, 2024',
-    readTime: '8 min read',
-    category: 'AI & Cybersecurity',
-    tags: ['AI', 'Machine Learning', 'Cybersecurity'],
-    thumbnail: '/assets/blog/ai-security.jpg',
-    featured: true
-  },
-  {
-    id: 2,
-    title: 'The Future of Web3 Development',
-    summary: 'Discover the latest trends in Web3 development and how blockchain technology is shaping the future of the internet.',
-    content: 'Web3 represents the next evolution...',
-    author: 'Jinish Kathiriya',
-    date: 'February 10, 2024',
-    readTime: '6 min read',
-    category: 'Web Development',
-    tags: ['Web3', 'Blockchain', 'DApps'],
-    thumbnail: '/assets/blog/web3.jpg'
-  },
-  {
-    id: 3,
-    title: 'Machine Learning for Beginners',
-    summary: 'A comprehensive guide to getting started with machine learning using Python and popular ML frameworks.',
-    content: 'Machine learning might seem daunting...',
-    author: 'Jinish Kathiriya',
-    date: 'February 5, 2024',
-    readTime: '10 min read',
-    category: 'Machine Learning',
-    tags: ['Python', 'ML', 'Data Science'],
-    thumbnail: '/assets/blog/ml-guide.jpg'
-  }
-];
-
-const categories = ['All', 'AI & Cybersecurity', 'Web Development', 'Machine Learning', 'Cloud Computing'];
+import { faSearch, faCalendar, faUser, faClock, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 function Blog() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
-  const filteredArticles = articles.filter(article => {
-    const matchesCategory = selectedCategory === 'All' || article.category === selectedCategory;
-    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         article.summary.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+  // Sample blog data - replace with your API call or data source
+  const blogPosts = [
+    {
+      id: 1,
+      title: "Getting Started with AI Development",
+      excerpt: "Learn the fundamentals of AI development and how to implement machine learning models.",
+      category: "AI & ML",
+      author: "Jinish Kathiriya",
+      date: "2024-01-15",
+      readTime: "8 min",
+      likes: 156,
+      image: "/assets/blog/ai-dev.jpg",
+      tags: ["AI", "Machine Learning", "Programming"]
+    },
+    // Add more blog posts here
+  ];
+
+  const categories = ["All", "AI & ML", "Web Dev", "DevOps", "Cybersecurity"];
+
+  const filteredPosts = blogPosts.filter(post => {
+    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
+    return matchesSearch && matchesCategory;
   });
-
-  const featuredArticle = articles.find(article => article.featured);
 
   return (
     <div className="min-h-screen bg-deep-space-blue">
       {/* Hero Section */}
-      <section className="relative py-20">
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-electric-blue/20 to-neon-turquoise/20 opacity-20"></div>
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row gap-8 items-center">
-            <motion.div 
-              className="md:w-1/2"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">Tech Insights & Innovations</h1>
-              <p className="text-xl text-gray-300 mb-8">
-                Stay ahead of the curve with our latest articles on AI, cybersecurity, web development, and more.
-              </p>
-              <div className="relative">
-                <FontAwesomeIcon icon={faSearch} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search articles..."
-                  className="w-full bg-gray-800 text-white rounded-lg py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-neon-turquoise"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
-            </motion.div>
-            {featuredArticle && (
-              <motion.div 
-                className="md:w-1/2"
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <div className="bg-gray-800 rounded-lg overflow-hidden">
-                  <img 
-                    src={featuredArticle.thumbnail} 
-                    alt={featuredArticle.title} 
-                    className="w-full h-64 object-cover"
-                  />
-                  <div className="p-6">
-                    <div className="flex items-center text-sm text-gray-400 mb-2">
-                      <span className="bg-neon-turquoise text-deep-space-blue px-2 py-1 rounded text-xs font-bold mr-2">
-                        Featured
-                      </span>
-                      <span className="mr-4">{featuredArticle.date}</span>
-                      <span>{featuredArticle.readTime}</span>
-                    </div>
-                    <h2 className="text-2xl font-bold mb-2">{featuredArticle.title}</h2>
-                    <p className="text-gray-300 mb-4">{featuredArticle.summary}</p>
-                    <button className="text-neon-turquoise hover:text-white transition-colors duration-300 flex items-center">
-                      Read More <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </div>
+          <motion.div 
+            className="max-w-4xl mx-auto text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-electric-blue to-neon-turquoise text-transparent bg-clip-text">
+              Tech Insights & Stories
+            </h1>
+            <p className="text-xl text-gray-300 mb-8">
+              Explore the latest in technology, development tips, and community stories.
+            </p>
+            
+            {/* Search Bar */}
+            <div className="relative max-w-2xl mx-auto mb-12">
+              <input
+                type="text"
+                placeholder="Search articles..."
+                className="w-full bg-deep-space-blue/50 border border-neon-turquoise/20 rounded-lg py-3 px-6 pl-12 focus:outline-none focus:border-neon-turquoise text-white placeholder-gray-400"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <FontAwesomeIcon 
+                icon={faSearch} 
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+              />
+            </div>
+
+            {/* Categories */}
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              {categories.map((category, index) => (
+                <motion.button
+                  key={index}
+                  className={`px-4 py-2 rounded-full border ${
+                    selectedCategory === category.toLowerCase() 
+                    ? 'bg-neon-turquoise text-deep-space-blue border-neon-turquoise' 
+                    : 'border-neon-turquoise/30 text-gray-300 hover:border-neon-turquoise'
+                  }`}
+                  onClick={() => setSelectedCategory(category.toLowerCase())}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {category}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="py-8 bg-gray-900">
-        <div className="container mx-auto px-4">
-          <div className="flex gap-4 overflow-x-auto pb-2">
-            {categories.map(category => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-lg transition-colors ${
-                  selectedCategory === category 
-                    ? 'bg-neon-turquoise text-deep-space-blue' 
-                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Articles Grid */}
-      <section className="py-16">
+      {/* Blog Posts Grid */}
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredArticles.map(article => (
+            {filteredPosts.map((post, index) => (
               <motion.article
-                key={article.id}
-                className="bg-gray-800 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+                key={post.id}
+                className="bg-deep-space-blue/30 rounded-xl overflow-hidden border border-neon-turquoise/10 hover:border-neon-turquoise/30 transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
               >
                 <img 
-                  src={article.thumbnail} 
-                  alt={article.title} 
+                  src={post.image} 
+                  alt={post.title}
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
-                  <div className="flex items-center text-sm text-gray-400 mb-2">
-                    <FontAwesomeIcon icon={faUser} className="mr-2" />
-                    <span className="mr-4">{article.author}</span>
-                    <FontAwesomeIcon icon={faClock} className="mr-2" />
-                    <span>{article.readTime}</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-2">{article.title}</h3>
-                  <p className="text-gray-400 mb-4">{article.summary}</p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex gap-2">
-                      {article.tags.map(tag => (
-                        <span 
-                          key={tag}
-                          className="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-neon-turquoise text-sm">{post.category}</span>
+                    <div className="flex items-center text-gray-400 text-sm">
+                      <FontAwesomeIcon icon={faClock} className="mr-2" />
+                      {post.readTime}
                     </div>
-                    <button className="text-neon-turquoise hover:text-white transition-colors duration-300">
-                      Read More
-                    </button>
+                  </div>
+                  <h2 className="text-xl font-bold mb-3 hover:text-neon-turquoise transition-colors">
+                    {post.title}
+                  </h2>
+                  <p className="text-gray-400 mb-4">{post.excerpt}</p>
+                  <div className="flex items-center justify-between text-sm text-gray-400">
+                    <div className="flex items-center">
+                      <FontAwesomeIcon icon={faUser} className="mr-2" />
+                      {post.author}
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <span><FontAwesomeIcon icon={faCalendar} className="mr-2" />{post.date}</span>
+                      <span><FontAwesomeIcon icon={faThumbsUp} className="mr-2" />{post.likes}</span>
+                    </div>
                   </div>
                 </div>
               </motion.article>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="py-16 bg-gradient-to-r from-electric-blue to-neon-turquoise">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Stay Updated</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Subscribe to our newsletter for weekly tech insights and updates.
-          </p>
-          <div className="max-w-md mx-auto flex gap-4">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 bg-white text-deep-space-blue rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-deep-space-blue"
-            />
-            <button className="bg-deep-space-blue text-white px-6 py-2 rounded-lg hover:bg-gray-900 transition-colors duration-300">
-              Subscribe
-            </button>
           </div>
         </div>
       </section>

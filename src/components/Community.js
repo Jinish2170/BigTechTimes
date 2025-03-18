@@ -1,185 +1,226 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faMapMarker, faClock, faUsers, faCode, faRocket, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-
-const upcomingEvents = [
-  {
-    id: 1,
-    title: 'AI & Machine Learning Hackathon 2024',
-    date: 'March 15-16, 2024',
-    time: '9:00 AM - 6:00 PM',
-    location: 'Online & San Francisco, CA',
-    description: 'Join us for a 48-hour hackathon focused on building innovative AI/ML solutions. Cash prizes, mentorship, and networking opportunities available!',
-    image: '/assets/events/ai-hackathon.jpg',
-    registrationLink: '#'
-  },
-  {
-    id: 2,
-    title: 'Cybersecurity Workshop Series',
-    date: 'April 5-7, 2024',
-    time: '10:00 AM - 2:00 PM',
-    location: 'Online',
-    description: 'Three-day intensive workshop covering advanced cybersecurity techniques, threat detection, and prevention strategies.',
-    image: '/assets/events/cyber-workshop.jpg',
-    registrationLink: '#'
-  },
-  {
-    id: 3,
-    title: 'Web3 Development Conference',
-    date: 'May 20, 2024',
-    time: '9:00 AM - 5:00 PM',
-    location: 'New York, NY',
-    description: 'Explore the future of web development with industry experts. Topics include blockchain, DApps, and smart contracts.',
-    image: '/assets/events/web3-conf.jpg',
-    registrationLink: '#'
-  }
-];
-
-const projectCategories = [
-  { name: 'All Projects', icon: faCode },
-  { name: 'AI/ML', icon: faRocket },
-  { name: 'Web Development', icon: faCode },
-  { name: 'Cybersecurity', icon: faShieldAlt }
-];
-
-const activeProjects = [
-  {
-    id: 1,
-    title: 'AI-Powered Code Assistant',
-    category: 'AI/ML',
-    members: 5,
-    techStack: ['Python', 'TensorFlow', 'React'],
-    description: 'Building an intelligent code assistant that helps developers write better code through AI-powered suggestions.',
-    progress: 65,
-    openRoles: ['ML Engineer', 'Frontend Developer']
-  },
-  // ... more projects
-];
+import { 
+  faCode, faLightbulb, 
+  faComments, faStar, faShareNodes, faLaptopCode 
+} from '@fortawesome/free-solid-svg-icons';
 
 function Community() {
-  const [selectedCategory, setSelectedCategory] = useState('All Projects');
+  const communityFeatures = [
+    {
+      icon: faComments,
+      title: "Tech Discussions",
+      description: "Engage in meaningful discussions about latest technologies, coding challenges, and industry trends."
+    },
+    {
+      icon: faLaptopCode,
+      title: "Code Reviews",
+      description: "Get your code reviewed by experienced developers and help others improve their code."
+    },
+    {
+      icon: faShareNodes,
+      title: "Knowledge Sharing",
+      description: "Share your experiences, solutions, and learn from others' real-world problem-solving approaches."
+    }
+  ];
+
+  const discussionTopics = [
+    {
+      category: "Problem Solving",
+      topics: [
+        "Algorithm Challenges",
+        "System Design Discussions",
+        "Performance Optimization",
+        "Debug Together"
+      ]
+    },
+    {
+      category: "Tech Stack",
+      topics: [
+        "Frontend Development",
+        "Backend Architecture",
+        "DevOps & Cloud",
+        "AI & Machine Learning"
+      ]
+    },
+    {
+      category: "Career Growth",
+      topics: [
+        "Code Review Culture",
+        "Technical Leadership",
+        "Best Practices",
+        "Architecture Patterns"
+      ]
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-deep-space-blue">
       {/* Hero Section */}
-      <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-electric-blue to-neon-turquoise opacity-10"></div>
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-electric-blue/20 to-neon-turquoise/20 opacity-20"></div>
         <motion.div 
-          className="text-center z-10 px-4"
+          className="container mx-auto px-4 text-center z-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">Join Our Tech Community</h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto text-gray-300">
-            Connect with fellow tech enthusiasts, collaborate on projects, and grow together.
-          </p>
-          <motion.button
-            className="mt-8 bg-neon-turquoise text-deep-space-blue px-8 py-3 rounded-lg font-bold hover:bg-electric-blue hover:text-white transition-colors duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <motion.h1 
+            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
           >
-            Become a Member
-          </motion.button>
+            <span className="bg-gradient-to-r from-electric-blue to-neon-turquoise text-transparent bg-clip-text">
+              Join Our Tech Community
+            </span>
+          </motion.h1>
+          <motion.p 
+            className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            Connect, collaborate, and grow with fellow tech enthusiasts in a supportive environment.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            <a 
+              href="#join-now" 
+              className="bg-electric-blue hover:bg-neon-turquoise text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 inline-flex items-center space-x-2"
+            >
+              <span>Join the Community</span>
+              <span className="ml-2">→</span>
+            </a>
+          </motion.div>
         </motion.div>
       </section>
 
-      {/* Events Section */}
-      <section className="py-16 bg-gray-900">
+      {/* Community Features */}
+      <section className="py-20 bg-gradient-to-b from-gray-900/50 to-transparent">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-center text-neon-turquoise">Upcoming Events</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {upcomingEvents.map(event => (
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-electric-blue to-neon-turquoise text-transparent bg-clip-text"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Connect, Share & Grow Together
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {communityFeatures.map((feature, index) => (
               <motion.div
-                key={event.id}
-                className="bg-gray-800 rounded-lg overflow-hidden"
+                key={index}
+                className="p-8 rounded-xl bg-deep-space-blue/30 backdrop-blur-sm border border-neon-turquoise/10 hover:border-neon-turquoise/30 transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
                 whileHover={{ y: -5 }}
               >
-                <img 
-                  src={event.image} 
-                  alt={event.title} 
-                  className="w-full h-48 object-cover"
+                <FontAwesomeIcon 
+                  icon={feature.icon} 
+                  className="text-neon-turquoise text-4xl mb-4" 
                 />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{event.title}</h3>
-                  <div className="flex items-center text-gray-400 mb-2">
-                    <FontAwesomeIcon icon={faCalendar} className="mr-2" />
-                    <span>{event.date}</span>
-                  </div>
-                  <div className="flex items-center text-gray-400 mb-2">
-                    <FontAwesomeIcon icon={faClock} className="mr-2" />
-                    <span>{event.time}</span>
-                  </div>
-                  <div className="flex items-center text-gray-400 mb-4">
-                    <FontAwesomeIcon icon={faMapMarker} className="mr-2" />
-                    <span>{event.location}</span>
-                  </div>
-                  <p className="text-gray-400 mb-4">{event.description}</p>
-                  <motion.button
-                    className="w-full bg-electric-blue text-white py-2 rounded-lg hover:bg-neon-turquoise transition-colors duration-300"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Register Now
-                  </motion.button>
-                </div>
+                <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
+                <p className="text-gray-400">{feature.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section className="py-16">
+      {/* Discussion Forums */}
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-center text-neon-turquoise">Active Projects</h2>
-          <div className="flex justify-center mb-8">
-            {projectCategories.map(category => (
-              <button
-                key={category.name}
-                onClick={() => setSelectedCategory(category.name)}
-                className={`flex items-center px-4 py-2 rounded-lg mr-4 transition-colors duration-300 ${
-                  selectedCategory === category.name 
-                    ? 'bg-neon-turquoise text-deep-space-blue' 
-                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                }`}
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-neon-turquoise">
+            Active Discussion Forums
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {discussionTopics.map((section, index) => (
+              <motion.div
+                key={index}
+                className="bg-deep-space-blue/30 backdrop-blur-sm border border-neon-turquoise/10 rounded-xl p-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
               >
-                <FontAwesomeIcon icon={category.icon} className="mr-2" />
-                {category.name}
-              </button>
+                <h3 className="text-2xl font-bold mb-6 text-electric-blue">{section.category}</h3>
+                <ul className="space-y-4">
+                  {section.topics.map((topic, topicIndex) => (
+                    <motion.li
+                      key={topicIndex}
+                      className="flex items-center space-x-3 text-gray-300 hover:text-neon-turquoise cursor-pointer transition-colors duration-200"
+                      whileHover={{ x: 10 }}
+                    >
+                      <FontAwesomeIcon icon={faLightbulb} className="text-neon-turquoise/50" />
+                      <span>{topic}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
             ))}
-          </div>
-          {/* Project cards grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Project cards will be mapped here */}
           </div>
         </div>
       </section>
 
-      {/* Discussion Forums */}
-      <section className="py-16 bg-gray-900">
+      {/* Community Engagement */}
+      <section className="py-20 bg-gradient-to-b from-transparent to-gray-900/50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-center text-neon-turquoise">Join the Discussion</h2>
-          {/* Forum categories and recent discussions */}
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-neon-turquoise">
+              How to Get Involved
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <motion.div
+                className="p-6 rounded-xl bg-deep-space-blue/30 border border-neon-turquoise/10"
+                whileHover={{ y: -5 }}
+              >
+                <h3 className="text-xl font-bold mb-4">Ask Questions</h3>
+                <p className="text-gray-400">
+                  Stuck on a problem? Share it with the community and get help from experienced developers.
+                </p>
+              </motion.div>
+              <motion.div
+                className="p-6 rounded-xl bg-deep-space-blue/30 border border-neon-turquoise/10"
+                whileHover={{ y: -5 }}
+              >
+                <h3 className="text-xl font-bold mb-4">Share Solutions</h3>
+                <p className="text-gray-400">
+                  Found a clever solution? Share your knowledge and help others learn from your experience.
+                </p>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-electric-blue to-neon-turquoise">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Start Collaborating?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Join our community of tech enthusiasts and start building amazing projects together.
+      <section id="join-now" className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-electric-blue/20 to-neon-turquoise/20"></div>
+        <motion.div 
+          className="container mx-auto px-4 text-center relative z-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Get Started?</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-300">
+            Join our community today and take your tech journey to the next level.
           </p>
-          <Link 
-            to="/signup" 
-            className="bg-white text-deep-space-blue hover:bg-gray-100 font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105"
+          <motion.button 
+            className="bg-electric-blue hover:bg-neon-turquoise text-white font-bold py-4 px-8 rounded-lg transition-all duration-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            Join BigTechTimes Today
-          </Link>
-        </div>
+            Sign Up Now
+          </motion.button>
+        </motion.div>
       </section>
     </div>
   );

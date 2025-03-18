@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
-import Learning from './components/Learning';
 import Community from './components/Community';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
@@ -46,7 +45,6 @@ function App() {
                   </motion.div>
                 } />
                 <Route path="/about" element={<About />} />
-                <Route path="/learning" element={<Learning />} />
                 <Route path="/community" element={<Community />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/contact" element={<Contact />} />

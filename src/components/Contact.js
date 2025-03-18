@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faPhone, faLocationDot, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faLinkedin, faTwitter, faGithub, faDiscord } from '@fortawesome/free-brands-svg-icons';
 
 function Contact() {
   const [name, setName] = useState('');
@@ -20,102 +23,195 @@ function Contact() {
     }, 2000);
   };
 
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeInOut"
-      }
+  const contactInfo = [
+    {
+      icon: faEnvelope,
+      title: "Email",
+      value: "contact@bigtechtimes.tech",
+      link: "mailto:contact@bigtechtimes.tech"
+    },
+    {
+      icon: faPhone,
+      title: "Phone",
+      value: "+1 (555) 123-4567",
+      link: "tel:+15551234567"
+    },
+    {
+      icon: faLocationDot,
+      title: "Location",
+      value: "San Francisco, CA",
+      link: "#"
     }
-  };
+  ];
+
+  const socialLinks = [
+    { icon: faLinkedin, href: "https://linkedin.com/company/bigtechtimes" },
+    { icon: faTwitter, href: "https://twitter.com/bigtechtimes" },
+    { icon: faGithub, href: "https://github.com/bigtechtimes" },
+    { icon: faDiscord, href: "https://discord.gg/bigtechtimes" }
+  ];
 
   return (
-    <motion.section
-      id="contact"
-      className="py-20 text-center"
-      variants={sectionVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold font-montserrat mb-12 text-neon-turquoise">Get in Touch with BigTechTimes</h2>
-        <p className="text-lg mb-8">Have questions, ideas, or partnership opportunities? We’d love to hear from you. Reach out to us using the contact form below or connect with us through our social media channels.</p>
+    <div className="min-h-screen bg-deep-space-blue">
+      {/* Hero Section */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-electric-blue/20 to-neon-turquoise/20 opacity-20"></div>
+        <motion.div 
+          className="container mx-auto px-4 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-electric-blue to-neon-turquoise text-transparent bg-clip-text">
+            Get in Touch
+          </h1>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            Have questions or ideas? We'd love to hear from you. Reach out and let's create something amazing together.
+          </p>
+        </motion.div>
+      </section>
 
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8">
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-left mb-2">Name</label>
-            <input
-              type="text"
-              id="name"
-              className="w-full bg-gray-700 text-white rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-neon-turquoise"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
+      {/* Contact Information */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {contactInfo.map((info, index) => (
+              <motion.a
+                key={index}
+                href={info.link}
+                className="p-6 rounded-xl bg-deep-space-blue/30 border border-neon-turquoise/10 hover:border-neon-turquoise/30 transition-all duration-300 group"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+              >
+                <FontAwesomeIcon 
+                  icon={info.icon} 
+                  className="text-4xl text-neon-turquoise mb-4 group-hover:scale-110 transition-transform duration-300" 
+                />
+                <h3 className="text-xl font-bold mb-2">{info.title}</h3>
+                <p className="text-gray-400">{info.value}</p>
+              </motion.a>
+            ))}
           </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-left mb-2">Email</label>
-            <input
-              type="email"
-              id="email"
-              className="w-full bg-gray-700 text-white rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-neon-turquoise"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="subject" className="block text-left mb-2">Subject</label>
-            <input
-              type="text"
-              id="subject"
-              className="w-full bg-gray-700 text-white rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-neon-turquoise"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="message" className="block text-left mb-2">Message</label>
-            <textarea
-              id="message"
-              className="w-full bg-gray-700 text-white rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-neon-turquoise"
-              rows="4"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            className="bg-electric-blue hover:bg-neon-turquoise text-white font-bold py-3 px-6 rounded transition-colors duration-200"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Sending...' : 'Send Message'}
-          </button>
-        </form>
-        {submissionResult && (
-          <div className={`mt-8 p-4 rounded-md ${submissionResult.success ? 'bg-green-700' : 'bg-red-700'}`}>
-            {submissionResult.message}
-          </div>
-        )}
 
-        <div className="mt-16">
-          <p>We'd love to hear from you! Please use the contact form above to send us a message.</p>
-          <p>You can also reach us via email at: <a href="mailto:contact@bigtechtimes.tech" className="text-neon-turquoise hover:text-white">contact@bigtechtimes.tech</a></p>
-          {/* Add Google Maps integration here */}
-          <div className="flex justify-center space-x-4 mt-4">
-            <a href="https://www.linkedin.com/" className="hover:text-neon-turquoise transition-colors duration-200" aria-label="LinkedIn"><i className="fab fa-linkedin"></i></a>
-            <a href="https://twitter.com/" className="hover:text-neon-turquoise transition-colors duration-200" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
-            <a href="https://discord.com/" className="hover:text-neon-turquoise transition-colors duration-200" aria-label="Discord"><i className="fab fa-discord"></i></a>
-            <a href="https://www.reddit.com/" className="hover:text-neon-turquoise transition-colors duration-200" aria-label="Reddit"><i className="fab fa-reddit"></i></a>
+          <div className="grid md:grid-cols-2 gap-16 items-start max-w-6xl mx-auto">
+            {/* Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 bg-gradient-to-r from-electric-blue to-neon-turquoise text-transparent bg-clip-text">
+                Send Us a Message
+              </h2>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      className="w-full bg-deep-space-blue/30 border border-neon-turquoise/20 rounded-lg py-3 px-4 focus:outline-none focus:border-neon-turquoise transition-colors duration-300"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      className="w-full bg-deep-space-blue/30 border border-neon-turquoise/20 rounded-lg py-3 px-4 focus:outline-none focus:border-neon-turquoise transition-colors duration-300"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="subject" className="block text-sm font-medium mb-2">Subject</label>
+                    <input
+                      type="text"
+                      id="subject"
+                      className="w-full bg-deep-space-blue/30 border border-neon-turquoise/20 rounded-lg py-3 px-4 focus:outline-none focus:border-neon-turquoise transition-colors duration-300"
+                      value={subject}
+                      onChange={(e) => setSubject(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
+                    <textarea
+                      id="message"
+                      rows="5"
+                      className="w-full bg-deep-space-blue/30 border border-neon-turquoise/20 rounded-lg py-3 px-4 focus:outline-none focus:border-neon-turquoise transition-colors duration-300"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      required
+                    ></textarea>
+                  </div>
+                </div>
+
+                <motion.button
+                  type="submit"
+                  className="bg-electric-blue hover:bg-neon-turquoise text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  disabled={isSubmitting}
+                >
+                  <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                  <FontAwesomeIcon icon={faPaperPlane} className={`ml-2 ${isSubmitting ? 'animate-pulse' : ''}`} />
+                </motion.button>
+              </form>
+            </motion.div>
+
+            {/* Connect Section */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+              className="bg-deep-space-blue/30 border border-neon-turquoise/10 rounded-xl p-8"
+            >
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 bg-gradient-to-r from-electric-blue to-neon-turquoise text-transparent bg-clip-text">
+                Connect With Us
+              </h2>
+              <p className="text-gray-300 mb-8">
+                Follow us on social media to stay updated with the latest tech trends, community events, and exciting opportunities.
+              </p>
+              <div className="flex space-x-6">
+                {socialLinks.map((social, index) => (
+                  <motion.a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-neon-turquoise transition-colors duration-300"
+                    whileHover={{ scale: 1.2, y: -2 }}
+                  >
+                    <FontAwesomeIcon icon={social.icon} size="2x" />
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
-      </div>
-    </motion.section>
+      </section>
+
+      {/* Submission Feedback */}
+      {submissionResult && (
+        <motion.div 
+          className={`fixed bottom-4 right-4 p-4 rounded-lg shadow-lg ${
+            submissionResult.success ? 'bg-green-600' : 'bg-red-600'
+          }`}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
+        >
+          {submissionResult.message}
+        </motion.div>
+      )}
+    </div>
   );
 }
 

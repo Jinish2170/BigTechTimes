@@ -3,3 +3,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  /* Remove the background image from body as it's handled in components */
+  @apply bg-deep-space-blue;
+}
