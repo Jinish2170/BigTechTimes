@@ -27,19 +27,19 @@ function Contact() {
     {
       icon: faEnvelope,
       title: "Email",
-      value: "contact@bigtechtimes.tech",
-      link: "mailto:contact@bigtechtimes.tech"
+      value: "jinishkathiriya@gmail.com",
+      link: "mailto:jinishkathiriya@gmail.com"
     },
     {
       icon: faPhone,
       title: "Phone",
-      value: "+1 (555) 123-4567",
-      link: "tel:+15551234567"
+      value: "+91 9099177304",
+      link: "tel:+919099177304"
     },
     {
       icon: faLocationDot,
       title: "Location",
-      value: "San Francisco, CA",
+      value: "Gujarat, india",
       link: "#"
     }
   ];
