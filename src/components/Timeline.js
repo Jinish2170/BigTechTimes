@@ -23,8 +23,8 @@ const timelineData = [
   { 
     year: '2025', 
     month: 'September', 
-    title: 'Strategic Partnerships', 
-    event: 'BigTechTimes reached another milestone by forming strategic partnerships with leading tech companies and educational institutions, enriching our platform with high-quality learning resources.' 
+    title: 'Strategic implementation', 
+    event: 'BigTechTimes reached another milestone by forming strategic implementation'
   }
 ];
 

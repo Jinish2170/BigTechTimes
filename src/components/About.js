@@ -138,7 +138,7 @@ function About() {
             <div className="bg-gray-800 rounded-lg p-8 flex flex-col md:flex-row items-center gap-8">
               <div className="md:w-1/3">
                 <img 
-                  src="/assets/team/jinish.jpg" 
+                  src="/assets/images/jinish.jpg" 
                   alt="Jinish Kathiriya" 
                   className="rounded-lg w-full max-w-[300px] mx-auto"
                 />

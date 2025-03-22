@@ -5,7 +5,7 @@ import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 function TeamCard({ member }) {
   return (
     <div className="bg-gray-800 rounded-lg p-4 w-64">
-      <img src={member.image} alt={member.name} className="w-24 h-24 rounded-full mx-auto mb-4" />
+      
       <h4 className="text-xl font-bold mb-2">{member.name}</h4>
       <p className="text-gray-400">{member.title}</p>
       <p className="text-sm mt-2">{member.bio}</p>
