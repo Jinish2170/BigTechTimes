@@ -1,7 +1,5 @@
 # BigTechTimes - Modern Tech Blog Platform
 
-![BigTechTimes Banner](./src/assets/images/logo169.jpg)
-
 ## 🚀 Overview
 
 BigTechTimes is a modern, responsive tech blog platform built with React.js and Tailwind CSS. It features a sleek, dark-themed UI with interactive elements and smooth animations, designed to provide an engaging user experience for tech content consumption.
